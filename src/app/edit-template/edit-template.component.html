@@ -1,0 +1,45 @@
+<h3 class="mb-3">{{title}}</h3>
+<div class="card-deck">
+  <div class="card">
+    <div class="card-body">
+      <form>
+        <div class="form-group">
+          <label for="template-name">Add Template Name</label>
+          <input type="email" class="form-control" id="template-name" placeholder="Template Name">
+        </div>
+        <label for="category">Category</label>
+        <select class="form-control" id="category">
+          <option disabled selected hidden>Select Template Category</option>
+          <option value="">Featured</option>
+          <option value="">New</option>
+          <option value="">Basic</option>
+          <option value="">Marketing</option>
+          <option value="">Business</option>
+        </select><br>
+        <div class="form-group">
+          <label for="file-input">Example file input</label>
+          <input type="file" class="form-control-file" id="file-input">
+        </div>
+        <div class="form-group">
+          <label for="exampleFormControlTextarea1">Description</label>
+          <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+        </div>
+        <button type="submit" class="btn btn-primary">Update</button>
+      </form>
+    </div>
+  </div>
+  <div class="card">
+    <div class="card-body d-flex flex-column justify-content-between">
+      <strong>Version: </strong>
+      <br><br>
+      <p>Last Approved Time:</p>
+      <p>Last Approval Request:</p>
+      <p>Date:</p>
+      <p>Last Approved Time:</p><br>
+      <div>
+        <button class="btn btn-primary d-inline-block mr-3 mb-3 mb-sm-0">Request for Approval</button>
+        <button class="btn btn-primary d-inline-block ">Delete Template</button>
+      </div>
+    </div>
+  </div>
+</div>

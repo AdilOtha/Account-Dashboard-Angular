@@ -1,0 +1,86 @@
+<h3>{{title}}</h3>
+<!-- TEMPLATE MODAL -->
+<ng-template #longContent let-modal>
+  <div class="modal-header">
+    <h4 class="modal-title">Create a new Template</h4>
+    <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <form>
+      <div class="form-group">
+        <label for="template-name">Add Template Name</label>
+        <input type="email" class="form-control" id="template-name" placeholder="Template Name">
+      </div>
+      <label for="category">Category</label>
+      <select class="form-control" id="category">
+        <option disabled selected hidden>Select Template Category</option>
+        <option value="">Featured</option>
+        <option value="">New</option>
+        <option value="">Basic</option>
+        <option value="">Marketing</option>
+        <option value="">Business</option>
+      </select><br>
+      <div class="form-group">
+        <label for="file-input">Example file input</label>
+        <input type="file" class="form-control-file" id="file-input">
+      </div>
+      <div class="form-group">
+        <label for="exampleFormControlTextarea1">Description</label>
+        <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+      </div>
+      <div class="modal-footer">
+        <button type="submit" class="btn">Submit</button>
+        <button type="button" class="btn" ngbAutoFocus (click)="modal.close('Close click')">Close</button>
+      </div>
+    </form>
+  </div>
+</ng-template>
+<button class="btn mb-3 mt-3 align-middle" (click)="openScrollableContent(longContent)">
+  <div class="d-inline-block" id="buttonText">Create a new Template</div>
+  <i class="ml-2">
+    <svg fill="#fff" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" width="64px" height="64px">
+      <path
+        d="M 64 6.0507812 C 49.15 6.0507812 34.3 11.7 23 23 C 0.4 45.6 0.4 82.4 23 105 C 34.3 116.3 49.2 122 64 122 C 78.8 122 93.7 116.3 105 105 C 127.6 82.4 127.6 45.6 105 23 C 93.7 11.7 78.85 6.0507812 64 6.0507812 z M 64 12 C 77.3 12 90.600781 17.099219 100.80078 27.199219 C 121.00078 47.499219 121.00078 80.500781 100.80078 100.80078 C 80.500781 121.10078 47.500781 121.10078 27.300781 100.80078 C 7.0007813 80.500781 6.9992188 47.499219 27.199219 27.199219 C 37.399219 17.099219 50.7 12 64 12 z M 64 42 C 62.3 42 61 43.3 61 45 L 61 61 L 45 61 C 43.3 61 42 62.3 42 64 C 42 65.7 43.3 67 45 67 L 61 67 L 61 83 C 61 84.7 62.3 86 64 86 C 65.7 86 67 84.7 67 83 L 67 67 L 83 67 C 84.7 67 86 65.7 86 64 C 86 62.3 84.7 61 83 61 L 67 61 L 67 45 C 67 43.3 65.7 42 64 42 z" />
+    </svg>
+  </i>
+</button>
+
+<!-- TEMPLATES -->
+<div class="row row-cols-1 row-cols-md-3">
+  <div class="col mb-3">
+    <div class="card">
+      <img src="https://dev.floatbot.ai/portal/asset/img/z_channel/template/32b047f086489666d4dd7fce11145fd2.jpg"
+        class="card-img-top" alt="template-image">
+      <div class="card-body">
+        <h5 class="card-title">Special title treatment</h5>
+        <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+        <div class="overlay">
+          <div class="button-group">
+            <a [href]="botBuilderUrl" target="_blank" class="btn mb-3">{{button1}}</a>
+            <a [href]="demoUrl" target="_blank" class="btn mb-3">{{button2}}</a>
+            <a routerLink="/edit-template" class="btn btn-primary">{{button3}}</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="col mb-3">
+    <div class="card">
+      <img src="https://dev.floatbot.ai/portal/asset/img/z_channel/template/32b047f086489666d4dd7fce11145fd2.jpg"
+        class="card-img-top" alt="template-image">
+      <div class="card-body">
+        <h5 class="card-title">Special title treatment</h5>
+        <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+        <div class="overlay">
+          <div class="button-group">
+            <a [href]="botBuilderUrl" target="_blank" class="btn mb-3">{{button1}}</a>
+            <a [href]="demoUrl" target="_blank" class="btn mb-3">{{button2}}</a>
+            <a routerLink="/edit-template" class="btn mb-3">{{button3}}</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

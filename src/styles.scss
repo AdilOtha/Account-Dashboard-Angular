@@ -1,0 +1,20 @@
+@import "./variables.scss";
+body {
+    font-family: Segoe UI,Frutiger,Frutiger Linotype,Dejavu Sans,Helvetica Neue,Arial,sans-serif; 
+    background: #fafafa;    
+}
+
+svg{
+    width: 30px;
+    height: 30px;    
+}
+
+#buttonText{
+    top: 1.5px;
+    position: relative;
+}
+
+#actionBtn svg{
+    width: 28px;
+    height: 28px;
+}

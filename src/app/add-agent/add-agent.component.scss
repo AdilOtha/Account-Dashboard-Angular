@@ -1,0 +1,27 @@
+.btn{
+    //background-color: var(--btnColor1);
+    background-color: var(--btnColor1);
+    color:white;
+    border: transparent;
+}
+
+#cancelBtn{
+    background-color: transparent;
+    color: #99abb4;
+    border: 1px solid #99abb4;
+}
+
+#cancelBtn:hover{
+    background-color: #99abb4;
+    color: #fff;
+    border: 1px solid #99abb4;
+}
+
+.custom-control-label::before{
+    background-color: #fff;
+    //border-color: #fff;
+  }
+.custom-checkbox .custom-control-input:checked~.custom-control-label::before{
+   background-color:var(--btnColor1);
+   border-color: #fff;
+}

@@ -1,0 +1,80 @@
+//@import "../../variables.scss";
+.card-title img{
+    display: inline;
+    border: solid 2px var(--btnColor1);
+    border-radius: 50%;
+    padding:12px;
+    white-space: nowrap;
+}
+
+.btn{
+    background-color: var(--btnColor1);
+    color:white;
+    border: transparent;
+}
+
+.button-group{
+    text-align: center;    
+}
+
+.button-group .btn, #cardSettings{
+    background-color: #fff;    
+    color: #99abb4;
+    border: 1px solid #99abb4;
+    border-radius: 5px;
+    text-transform: uppercase;    
+}
+
+h6{
+    color: #99abb4;
+}
+
+#cardSettings{
+    border: 0px;
+}
+
+#cardSettings svg{
+    fill: #99abb4;
+}
+
+.button-group .btn:hover{
+    //border-color: rgba(0, 0, 0, 0.17) rgba(0, 0, 0, 0.17) rgba(0, 0, 0, 0.2);
+    color: var(--btnColor1);
+    box-shadow: 0 2px 8px -2px rgba(0, 0, 0, 0.17);
+    border: 1px solid var(--btnColor1);
+}
+
+.modal-body .row div{
+    text-align: center;
+}
+
+.card-body{
+    position: relative;
+}
+
+.card-icon{
+    position: absolute;
+    top:4px;
+    right: 14px;
+}
+
+svg{
+    width: 20px;
+    height: 20px;
+}
+
+.card{
+    border-radius: 5px;
+    transition: all 0.5s ease;
+    box-shadow: 0px 0px 8px 2px rgba(0, 0, 0, 0.17);
+}
+
+.card:hover{
+    transform: scale(1.05);
+    box-shadow: 0px 0px 8px 7px rgba(0, 0, 0, 0.17);
+}
+
+// #plusIcon{
+//     width: 18px;
+//     height: 18px;
+// }

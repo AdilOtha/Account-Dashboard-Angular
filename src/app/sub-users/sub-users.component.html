@@ -1,0 +1,359 @@
+<h3 class="mb-4">{{title}}</h3>
+<!-- ADD USER MODAL -->
+<ng-template #content let-modal>
+    <div class="modal-header">
+        <h4 class="modal-title">Add User</h4>
+        <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    <div class="modal-body">
+        <form>
+            <div class="form-row">
+                <div class="form-group col-md-5">
+                    <!-- <label for="userName">User Name</label> -->
+                    <input ngbAutoFocus type="text" class="form-control" id="userName" placeholder="User Name">
+                </div>
+                <div class="form-group col-md-5">
+                    <!-- <label for="email">Email</label> -->
+                    <input type="email" class="form-control" id="email" placeholder="Email">
+                </div>
+                <div class="form-group col-md-2">
+                    <select class="custom-select">
+                        <option disabled selected hidden></option>
+                        <option value="1">Active</option>
+                        <option value="0">Inactive</option>
+                    </select>
+                </div>
+            </div>
+            <!-- HORIZONTAL RULER  -->
+            <hr />
+            <!-- CHECKBOXES Rows-->
+            <ul ngbNav #nav="ngbNav" [(activeId)]="active" [destroyOnHide]="false" class="nav-tabs">
+                <li [ngbNavItem] *ngFor="let parent of data.list">
+                    <a ngbNavLink>{{parent.name}}</a>
+                    <ng-template ngbNavContent>
+                        <div class="custom-control custom-checkbox mt-3 text-center">
+                            <input type="checkbox" [(ngModel)]="parent.isSelected" [value]="parent.value"
+                                (ngModelChange)="parentCheck(parent)" [name]="parent.name" class="custom-control-input"
+                                [id]="parent.value">
+                            <label class="custom-control-label" [for]="parent.value">{{parent.name}}</label>
+                        </div>
+                        <div class="container">
+                            <div class="row checkbox-row mb-4">
+                                <div class="col-sm-6" *ngFor="let child of parent.childList">
+                                    <div class="custom-control custom-checkbox mt-3">
+                                        <input type="checkbox" [(ngModel)]="child.isSelected" [name]="child.name"
+                                            class="custom-control-input" [id]="child.value">
+                                        <label class="custom-control-label" [for]="child.value">{{child.name}}</label>
+                                    </div>
+                                </div>
+                                <!-- <div class="d-flex flex-column">
+                                        <div class="custom-control custom-checkbox mt-3">
+                                            <input type="checkbox" [(ngModel)]="data.list[0].childlist[0]"
+                                                class="custom-control-input" id="customCheck1">
+                                            <label class="custom-control-label" for="customCheck1">Can Update Flow</label>
+                                        </div>
+                                        <div class="custom-control custom-checkbox mt-3">
+                                            <input type="checkbox" class="custom-control-input" id="customCheck2">
+                                            <label class="custom-control-label" for="customCheck2">Can Delete Flow</label>
+                                        </div>
+                                    </div>
+                                    <div class="d-flex flex-column">
+                                        <div class="custom-control custom-checkbox mt-3">
+                                            <input type="checkbox" class="custom-control-input" id="customCheck3">
+                                            <label class="custom-control-label" for="customCheck3">Can Create Flow</label>
+                                        </div>
+                                    </div> -->
+                            </div>
+                        </div>
+
+                    </ng-template>
+                </li>
+                <!-- <li [ngbNavItem]="2">
+                    <a ngbNavLink>AI</a>
+                    <ng-template ngbNavContent>
+                        <div class="d-flex flex-row justify-content-center">
+                            <div class="custom-control custom-checkbox mt-3">
+                                <input type="checkbox" class="custom-control-input" id="toggle2">
+                                <label class="custom-control-label" for="toggle2">Toggle</label>
+                            </div>
+                        </div>
+                        <div class="d-flex flex-row justify-content-around">
+                            <div class="d-flex flex-column">
+                                <div class="custom-control custom-checkbox mt-3">
+                                    <input type="checkbox" class="custom-control-input" id="customCheck4">
+                                    <label class="custom-control-label" for="customCheck4">Can Add Intent &amp;
+                                        Entities&nbsp;</label>
+                                </div>
+                                <div class="custom-control custom-checkbox mt-3">
+                                    <input type="checkbox" class="custom-control-input" id="customCheck5">
+                                    <label class="custom-control-label" for="customCheck5">Can Update Intent &amp;
+                                        Entities&nbsp;</label>
+                                </div>
+                                <div class="custom-control custom-checkbox mt-3">
+                                    <input type="checkbox" class="custom-control-input" id="customCheck6">
+                                    <label class="custom-control-label" for="customCheck6">Can Delete Intent &amp;
+                                        Entities&nbsp;</label>
+                                </div>
+                            </div>
+                            <div class="d-flex flex-column">
+                                <div class="custom-control custom-checkbox mt-3">
+                                    <input type="checkbox" class="custom-control-input" id="customCheck7">
+                                    <label class="custom-control-label" for="customCheck7">Can Change Bot
+                                        Confidence</label>
+                                </div>
+                                <div class="custom-control custom-checkbox mt-3">
+                                    <input type="checkbox" class="custom-control-input" id="customCheck8">
+                                    <label class="custom-control-label" for="customCheck8">Can Train Bot</label>
+                                </div>
+                                <div class="custom-control custom-checkbox mt-3">
+                                    <input type="checkbox" class="custom-control-input" id="customCheck9">
+                                    <label class="custom-control-label" for="customCheck9">Can View Smalltalk</label>
+                                </div>
+                            </div>
+                        </div>
+                    </ng-template>
+                </li>
+                <li [ngbNavItem]="3">
+                    <a ngbNavLink>Engage</a>
+                    <ng-template ngbNavContent let-active>
+                        <div class="d-flex flex-row justify-content-center">
+                            <div class="custom-control custom-checkbox mt-3">
+                                <input type="checkbox" class="custom-control-input" id="toggle3">
+                                <label class="custom-control-label" for="toggle3">Toggle</label>
+                            </div>
+                        </div>
+                        <div class="d-flex flex-row justify-content-around">
+                            <div class="custom-control custom-checkbox mt-3">
+                                <input type="checkbox" class="custom-control-input" id="customCheck10">
+                                <label class="custom-control-label" for="customCheck10">Send Broadcast</label>
+                            </div>
+                            <div class="custom-control custom-checkbox mt-3">
+                                <input type="checkbox" class="custom-control-input" id="customCheck11">
+                                <label class="custom-control-label" for="customCheck11">View History</label>
+                            </div>
+                        </div>
+                    </ng-template>
+                </li>
+                <li [ngbNavItem]="4">
+                    <a ngbNavLink>Analyze</a>
+                    <ng-template ngbNavContent>
+                        <div class="d-flex flex-row justify-content-center">
+                            <div class="custom-control custom-checkbox mt-3">
+                                <input type="checkbox" class="custom-control-input" id="toggle4">
+                                <label class="custom-control-label" for="toggle4">Toggle</label>
+                            </div>
+                        </div>
+                        <div class="d-flex flex-row justify-content-around">
+                            <div class="d-flex flex-column">
+                                <div class="custom-control custom-checkbox mt-3">
+                                    <input type="checkbox" class="custom-control-input" id="customCheck12">
+                                    <label class="custom-control-label" for="customCheck12">Overview</label>
+                                </div>
+                                <div class="custom-control custom-checkbox mt-3">
+                                    <input type="checkbox" class="custom-control-input" id="customCheck13">
+                                    <label class="custom-control-label" for="customCheck13">Can View User Query</label>
+                                </div>
+                                <div class="custom-control custom-checkbox mt-3">
+                                    <input type="checkbox" class="custom-control-input" id="customCheck14">
+                                    <label class="custom-control-label" for="customCheck14">Can View User
+                                        Sessions</label>
+                                </div>
+                                <div class="custom-control custom-checkbox mt-3">
+                                    <input type="checkbox" class="custom-control-input" id="customCheck15">
+                                    <label class="custom-control-label" for="customCheck15">Export Chat</label>
+                                </div>
+                            </div>
+                            <div class="d-flex flex-column">
+                                <div class="custom-control custom-checkbox mt-3">
+                                    <input type="checkbox" class="custom-control-input" id="customCheck16">
+                                    <label class="custom-control-label" for="customCheck16">Use Developer
+                                        Options</label>
+                                </div>
+                                <div class="custom-control custom-checkbox mt-3">
+                                    <input type="checkbox" class="custom-control-input" id="customCheck17">
+                                    <label class="custom-control-label" for="customCheck17">Test AI</label>
+                                </div>
+                                <div class="custom-control custom-checkbox mt-3">
+                                    <input type="checkbox" class="custom-control-input" id="customCheck18">
+                                    <label class="custom-control-label" for="customCheck18">View API logs</label>
+                                </div>
+                            </div>
+                        </div>
+                    </ng-template>
+                </li>
+                <li [ngbNavItem]="5">
+                    <a ngbNavLink>Configure Bot</a>
+                    <ng-template ngbNavContent>
+                        <div class="d-flex flex-row justify-content-center">
+                            <div class="custom-control custom-checkbox mt-3">
+                                <input type="checkbox" class="custom-control-input" id="toggle5">
+                                <label class="custom-control-label" for="toggle4">Toggle</label>
+                            </div>
+                        </div>
+                        <div class="d-flex flex-row justify-content-around">
+                            <div class="d-flex flex-column">
+                                <div class="custom-control custom-checkbox mt-3">
+                                    <input type="checkbox" class="custom-control-input" id="customCheck19">
+                                    <label class="custom-control-label" for="customCheck19">Payment Configure</label>
+                                </div>
+                                <div class="custom-control custom-checkbox mt-3">
+                                    <input type="checkbox" class="custom-control-input" id="customCheck20">
+                                    <label class="custom-control-label" for="customCheck20">Agent chat Setting</label>
+                                </div>
+                                <div class="custom-control custom-checkbox mt-3">
+                                    <input type="checkbox" class="custom-control-input" id="customCheck21">
+                                    <label class="custom-control-label" for="customCheck21">Update AI language</label>
+                                </div>
+                                <div class="custom-control custom-checkbox mt-3">
+                                    <input type="checkbox" class="custom-control-input" id="customCheck22">
+                                    <label class="custom-control-label" for="customCheck22">Map settings</label>
+                                </div>
+                            </div>
+                            <div class="d-flex flex-column">
+                                <div class="custom-control custom-checkbox mt-3">
+                                    <input type="checkbox" class="custom-control-input" id="customCheck23">
+                                    <label class="custom-control-label" for="customCheck23">Import/Export Bot</label>
+                                </div>
+                                <div class="custom-control custom-checkbox mt-3">
+                                    <input type="checkbox" class="custom-control-input" id="customCheck24">
+                                    <label class="custom-control-label" for="customCheck24">Bot Settings</label>
+                                </div>
+                                <div class="custom-control custom-checkbox mt-3">
+                                    <input type="checkbox" class="custom-control-input" id="customCheck25">
+                                    <label class="custom-control-label" for="customCheck25">Integrations</label>
+                                </div>
+                            </div>
+                        </div>
+                    </ng-template>
+                </li>
+                <li [ngbNavItem]="6">
+                    <a ngbNavLink>Other</a>
+                    <ng-template ngbNavContent>
+                        <div class="d-flex flex-row justify-content-around">
+                            <div class="d-flex flex-column">
+                                <div class="custom-control custom-checkbox mt-3">
+                                    <input type="checkbox" class="custom-control-input" id="customCheck26">
+                                    <label class="custom-control-label" for="customCheck26">Can Delete Bot</label>
+                                </div>
+                                <div class="custom-control custom-checkbox mt-3">
+                                    <input type="checkbox" class="custom-control-input" id="customCheck27">
+                                    <label class="custom-control-label" for="customCheck27">Change Settings</label>
+                                </div>
+                            </div>
+                            <div class="d-flex flex-column">
+                                <div class="custom-control custom-checkbox mt-3">
+                                    <input type="checkbox" class="custom-control-input" id="customCheck28">
+                                    <label class="custom-control-label" for="customCheck28">Can Create New Bot</label>
+                                </div>
+                            </div>
+                        </div>
+                    </ng-template>
+                </li> -->
+                <li [ngbNavItem]="7">
+                    <a ngbNavLink>Bots</a>
+                    <ng-template ngbNavContent>
+                        <div class="row bots-row mb-4">
+                            <div class="col-sm-6" *ngFor="let chatbot of chatBotData">
+                                <div class="custom-control custom-checkbox mt-3">
+                                    <input type="checkbox" class="custom-control-input" id="{{chatbot.channel_bot_id}}"
+                                        value="{{chatbot.channel_bot_id}}">
+                                    <label class="custom-control-label"
+                                        for="{{chatbot.channel_bot_id}}">{{chatbot.flb_name}}</label>
+                                </div>
+                            </div>
+                        </div>
+                    </ng-template>
+                </li>
+            </ul>
+
+            <div [ngbNavOutlet]="nav" class="mt-2"></div>
+
+
+            <div class="modal-footer">
+                <button class="btn">Save</button>
+                <button class="btn" id="cancelBtn" (click)="modal.dismiss('Cross click')">Cancel</button>
+            </div>
+
+        </form>
+    </div>
+</ng-template>
+<div class="card">
+    <div class="card-body">
+        <form>
+            <div class="form-group form-inline d-inline-block">
+                Search by ID: <input class="form-control ml-2" type="text" name="searchTerm"
+                    [(ngModel)]="service.searchTerm" />
+                <span class="ml-3" *ngIf="service.loading$ | async">Loading...</span>
+            </div>
+            <button class="btn btn-outline-primary mb-2 mr-2 d-inline-block float-right" (click)="open(content)">Add
+                User</button>
+            <div class="table-responsive">
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <!-- <th scope="col">#</th> -->
+                            <th scope="col" sortable="name" (sort)="onSort($event)">Name</th>
+                            <th scope="col" sortable="email_address" (sort)="onSort($event)">Email</th>
+                            <th scope="col" sortable="created_on" (sort)="onSort($event)">Created At</th>
+                            <th scope="col">Status</th>
+                            <th scope="col">Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let data of subUserData$ | async">
+                            <td>
+                                <ngb-highlight [result]="data.name" [term]="service.searchTerm"></ngb-highlight>
+                            </td>
+                            <td>
+                                <ngb-highlight [result]="data.email_address"></ngb-highlight>
+                            </td>
+                            <td>
+                                <ngb-highlight [result]="data.created_on | date"></ngb-highlight>
+                            </td>
+                            <td>
+                                <!-- <ngb-highlight [result]="data.status"></ngb-highlight> -->
+                                <ng-container *ngIf="data.status=='1';else disabled">
+                                    <span class="label1 p-1 px-2">enabled</span>
+                                </ng-container>
+                                <ng-template #disabled>
+                                    <span class="label1 p-1 px-2">disabled</span>
+                                </ng-template>
+                            </td>
+                            <td>
+                                <ng-container *ngIf="data.status=='1'">
+                                    <a href="" class="pt-2">
+                                        <i>
+                                            <svg id="editIcon" height="401pt" viewBox="0 -1 401.52289 401" width="401pt"
+                                                xmlns="http://www.w3.org/2000/svg">
+                                                <path
+                                                    d="m370.589844 250.972656c-5.523438 0-10 4.476563-10 10v88.789063c-.019532 16.5625-13.4375 29.984375-30 30h-280.589844c-16.5625-.015625-29.980469-13.4375-30-30v-260.589844c.019531-16.558594 13.4375-29.980469 30-30h88.789062c5.523438 0 10-4.476563 10-10 0-5.519531-4.476562-10-10-10h-88.789062c-27.601562.03125-49.96875 22.398437-50 50v260.59375c.03125 27.601563 22.398438 49.96875 50 50h280.589844c27.601562-.03125 49.96875-22.398437 50-50v-88.792969c0-5.523437-4.476563-10-10-10zm0 0" />
+                                                <path
+                                                    d="m376.628906 13.441406c-17.574218-17.574218-46.066406-17.574218-63.640625 0l-178.40625 178.40625c-1.222656 1.222656-2.105469 2.738282-2.566406 4.402344l-23.460937 84.699219c-.964844 3.472656.015624 7.191406 2.5625 9.742187 2.550781 2.546875 6.269531 3.527344 9.742187 2.566406l84.699219-23.464843c1.664062-.460938 3.179687-1.34375 4.402344-2.566407l178.402343-178.410156c17.546875-17.585937 17.546875-46.054687 0-63.640625zm-220.257812 184.90625 146.011718-146.015625 47.089844 47.089844-146.015625 146.015625zm-9.40625 18.875 37.621094 37.625-52.039063 14.417969zm227.257812-142.546875-10.605468 10.605469-47.09375-47.09375 10.609374-10.605469c9.761719-9.761719 25.589844-9.761719 35.351563 0l11.738281 11.734375c9.746094 9.773438 9.746094 25.589844 0 35.359375zm0 0" />
+                                            </svg>
+                                        </i>
+                                    </a>
+                                </ng-container>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+
+            <div class="d-flex flex-wrap justify-content-between p-2">
+                <ngb-pagination [collectionSize]="(total$ | async)" [(page)]="service.page"
+                    [pageSize]="service.pageSize">
+                </ngb-pagination>
+                <!-- (total$ | async)! -->
+                <select class="custom-select" style="width: auto" name="pageSize" [(ngModel)]="service.pageSize">
+                    <option [ngValue]="5">5 items per page</option>
+                    <option [ngValue]="10">10 items per page</option>
+                    <option [ngValue]="15">15 items per page</option>
+                </select>
+            </div>
+
+        </form>
+    </div>
+</div>

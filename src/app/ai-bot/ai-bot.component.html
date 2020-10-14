@@ -1,0 +1,117 @@
+<div class="d-inline-flex justify-content-between align-items-center mb-3">
+  <h3 class="d-inline" style="position: relative;top: 2px;">{{title}}</h3>
+  <button class="d-inline-block btn align-middle ml-3" id="actionBtn">
+    <div class="d-inline-block" id="buttonText">Create Bot</div>
+    <i class="ml-2" (click)="open(content)">
+      <svg id="plusIcon" fill="#fff" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" width="64px"
+        height="64px">
+        <path
+          d="M 64 6.0507812 C 49.15 6.0507812 34.3 11.7 23 23 C 0.4 45.6 0.4 82.4 23 105 C 34.3 116.3 49.2 122 64 122 C 78.8 122 93.7 116.3 105 105 C 127.6 82.4 127.6 45.6 105 23 C 93.7 11.7 78.85 6.0507812 64 6.0507812 z M 64 12 C 77.3 12 90.600781 17.099219 100.80078 27.199219 C 121.00078 47.499219 121.00078 80.500781 100.80078 100.80078 C 80.500781 121.10078 47.500781 121.10078 27.300781 100.80078 C 7.0007813 80.500781 6.9992188 47.499219 27.199219 27.199219 C 37.399219 17.099219 50.7 12 64 12 z M 64 42 C 62.3 42 61 43.3 61 45 L 61 61 L 45 61 C 43.3 61 42 62.3 42 64 C 42 65.7 43.3 67 45 67 L 61 67 L 61 83 C 61 84.7 62.3 86 64 86 C 65.7 86 67 84.7 67 83 L 67 67 L 83 67 C 84.7 67 86 65.7 86 64 C 86 62.3 84.7 61 83 61 L 67 61 L 67 45 C 67 43.3 65.7 42 64 42 z" />
+      </svg>
+    </i>
+  </button>
+</div>
+<!-- MODAL -->
+<ng-template #content let-modal>
+  <div class="modal-header">
+    <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body mx-auto">
+    <div class="row">
+      <div class="col-6 col-sm-6 col-md-6">
+        <img src="https://floatbot.ai/portal/asset/img/icons/create_bot.png" class="mb-2" alt="bot-image">
+        <button type="button" ngbAutoFocus class="btn d-block w-100">New Bot</button>
+      </div>
+      <div class="col-6 col-sm-6 col-md-6">
+        <img src="https://floatbot.ai/portal/asset/img/icons/use_template.png" class="mb-2" alt="bot-template-image">
+        <button type="button" class="btn">New Template</button>
+      </div>
+    </div>
+  </div>
+</ng-template>
+
+<!-- DELETE MODAL -->
+<ng-template #deleteModal let-modal>
+  <div class="modal-header justify-content-center">
+    <h5 class="modal-title">Are you sure you want to delete the Bot?</h5>
+    <!-- <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+      <span aria-hidden="true">&times;</span>
+    </button> -->
+  </div>
+  <div class="modal-body mx-auto">
+    <div class="row">
+      <div class="col-6 col-sm-6 col-md-6">
+        <button type="button" (click)="deleteBot(deleteBotId); modal.dismiss('Cross click')" class="btn d-block w-100">Delete</button>
+      </div>
+      <div class="col-6 col-sm-6 col-md-6">
+        <button type="button" ngbAutoFocus class="btn" (click)="modal.dismiss('Cross click')">Cancel</button>
+      </div>
+    </div>
+  </div>
+</ng-template>
+
+<div *ngIf="deleteBotError!==undefined" class="alert alert-danger">
+  {{deleteBotError.message}}
+</div>
+
+<!-- CARDS -->
+<div class="row row-cols-1 row-cols-md-2 row-cols-lg-3">
+  <div class="col mb-4" *ngFor="let chatbot of chatBotData">
+    <div class="card">
+      <div class="card-body">
+        <a [routerLink]="['/bot-settings',{botID: chatbot.channel_bot_id}]"
+          class="d-inline-block btn float-right card-icon" id="cardSettings">
+          <i>
+            <svg version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+              x="0px" y="0px" viewBox="0 0 308.395 308.395" style="enable-background:new 0 0 308.395 308.395;"
+              xml:space="preserve">
+              <path id="XMLID_112_"
+                d="M301.903,188.419l-27.96-23.111c0.682-7.389,0.681-14.824-0.003-22.22l27.962-23.113
+c4.139-3.421,5.203-9.329,2.519-13.979l-33.37-57.794c-2.685-4.648-8.33-6.682-13.365-4.809l-33.977,12.651
+c-6.066-4.304-12.514-8.029-19.267-11.133L198.411,9.17C197.518,3.876,192.934,0,187.564,0h-66.736
+c-5.369,0-9.953,3.876-10.847,9.17l-6.031,35.744c-6.75,3.102-13.194,6.826-19.263,11.131l-33.98-12.653
+c-5.029-1.872-10.681,0.159-13.365,4.809L3.976,105.996c-2.685,4.649-1.62,10.558,2.518,13.979l27.96,23.111
+c-0.684,7.394-0.684,14.827,0,22.221L6.491,188.421c-4.138,3.421-5.202,9.329-2.518,13.979l33.368,57.794
+c2.685,4.648,8.334,6.685,13.364,4.809l33.98-12.651c6.064,4.304,12.51,8.027,19.264,11.131l6.033,35.744
+c0.894,5.294,5.478,9.169,10.847,9.169h66.737c5.369,0,9.954-3.876,10.847-9.171l6.028-35.741
+c6.754-3.103,13.201-6.827,19.268-11.132l33.977,12.65c5.032,1.874,10.68-0.159,13.364-4.809l33.37-57.795
+C307.105,197.748,306.041,191.84,301.903,188.419z M256.648,241.139l-30.889-11.5c-3.604-1.342-7.649-0.704-10.665,1.684
+c-7.464,5.909-15.727,10.683-24.56,14.189c-3.575,1.419-6.148,4.602-6.788,8.395l-5.479,32.488h-48.139l-5.483-32.49
+c-0.64-3.791-3.213-6.973-6.786-8.392c-8.836-3.511-17.098-8.284-24.557-14.189c-3.017-2.389-7.063-3.026-10.666-1.685
+L51.745,241.14l-24.069-41.687l25.412-21.007c2.959-2.446,4.429-6.258,3.877-10.058c-1.366-9.417-1.366-18.968,0-28.385
+c0.552-3.8-0.918-7.611-3.877-10.058l-25.41-21.004l24.067-41.688l30.891,11.503c3.604,1.341,7.648,0.706,10.665-1.683
+c7.469-5.91,15.731-10.686,24.56-14.192c3.572-1.419,6.146-4.602,6.785-8.393L130.128,22h48.137l5.482,32.488
+c0.64,3.791,3.212,6.974,6.785,8.393c8.834,3.51,17.098,8.284,24.563,14.192c3.016,2.388,7.06,3.025,10.665,1.684l30.888-11.501
+l24.069,41.687l-25.412,21.006c-2.96,2.446-4.43,6.258-3.878,10.058c1.367,9.426,1.368,18.976,0.004,28.384
+c-0.552,3.8,0.918,7.611,3.877,10.058l25.41,21.004L256.648,241.139z M126.238,126.24c-7.468,7.467-11.58,17.396-11.58,27.957
+s4.112,20.49,11.581,27.958c3.392,3.392,7.301,6.103,11.615,8.057c5.534,2.507,7.988,9.025,5.482,14.559
+c-1.84,4.062-5.841,6.465-10.027,6.465c-1.518,0-3.059-0.315-4.531-0.982c-6.735-3.051-12.823-7.271-18.095-12.54
+c-11.624-11.624-18.025-27.078-18.025-43.516s6.401-31.892,18.024-43.515c5.272-5.271,11.36-9.49,18.096-12.541
+c5.531-2.503,12.052-0.053,14.559,5.482c2.506,5.533,0.052,12.052-5.482,14.559C133.54,120.137,129.631,122.848,126.238,126.24z
+ M197.713,110.683c23.991,23.994,23.991,63.035,0,87.028c-5.268,5.269-11.353,9.486-18.088,12.539
+c-1.473,0.668-3.016,0.984-4.534,0.984c-4.186,0-8.186-2.401-10.025-6.462c-2.509-5.533-0.056-12.052,5.478-14.56
+c4.316-1.957,8.224-4.668,11.613-8.058c15.415-15.416,15.415-40.5,0-55.917c-3.39-3.389-7.297-6.1-11.613-8.057
+c-5.533-2.508-7.986-9.026-5.478-14.56c2.508-5.532,9.023-7.985,14.56-5.478C186.36,101.197,192.445,105.415,197.713,110.683z" />
+            </svg>
+          </i>
+        </a>
+        <div class="d-flex justify-content-between align-items-center mb-3 mr-0 card-top">
+          <h5 class="card-title mb-0 mr-1"><img src="https://dev.floatbot.ai/portal/asset/img/svg/floatbot_bird.svg"
+              alt="logo" class="mr-3">{{chatbot.flb_name}}</h5>
+        </div>
+        <div class="d-flex justify-content-center">
+          <div class="button-group">
+            <div class="d-flex justify-content-between">
+              <a [href]="botBuilderUrl+chatbot.channel_bot_id" target="_blank" type="button" class="btn mr-2">Bot
+                Builder</a>
+              <a [href]="demoUrl+chatbot.channel_bot_id" target="_blank" type="button" class="btn mr-2">Demo</a>
+              <button type="button" (click)="openDeleteModal(deleteModal,chatbot.channel_bot_id)" class="btn mr-2">Delete Bot</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

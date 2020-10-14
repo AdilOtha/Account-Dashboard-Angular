@@ -1,0 +1,92 @@
+<h3 class="mb-4">{{title}}</h3>
+<div class="card">
+  <div class="card-body">
+    <form [formGroup]="myForm" #formDir="ngForm" (ngSubmit)="submitForm()" enctype="multipart/form-data">
+      <ul ngbNav #nav="ngbNav" [(activeId)]="active" [destroyOnHide]="false" class="nav-tabs">
+        <li [ngbNavItem]="1" [destroyOnHide]="true">
+          <a ngbNavLink>AI Settings</a>
+          <ng-template ngbNavContent>
+            <div class="form-group">
+              <label for="aiSet">Is AI set?</label>
+              <input type="text" formControlName="isAiSetInput" [value]="isAiSet" class="form-control" id="aiSet" placeholder="" >
+            </div>
+            <div class="form-group">
+              <label for="aiType">AI Type</label>
+              <input type="text" formControlName="aiType" [value]="chatBotData.ai_type" class="form-control" id="aiType" placeholder="" >
+            </div>
+            <div class="form-group">
+              <label for="devToken">Developer Token</label>
+              <input type="text" formControlName="floatbotDevToken" [value]="chatBotData.floatbot_developer_token" class="form-control" id="devToken"
+                placeholder=""  >
+            </div>
+            <div class="form-group">
+              <label for="clientToken">Client Token</label>
+              <input type="text" formControlName="floatbotClientToken" [value]="chatBotData.floatbot_client_token" class="form-control" id="clientToken"
+                placeholder=""  >
+            </div>
+          </ng-template>
+        </li>
+        <li [ngbNavItem]="2" [destroyOnHide]="true">
+          <a ngbNavLink>Android Settings</a>
+          <ng-template ngbNavContent>
+            <div class="form-group">
+              <label for="botID1">Bot ID</label>
+              <input type="text" formControlName="botIdInput" [value]="botID" class="form-control" id="botID1" placeholder=""  >
+            </div>
+            <div class="form-group">
+              <label for="token">Token</label>
+              <input type="number" formControlName="apiKey" [value]="chatBotData.api_security_key" class="form-control" id="token"
+                placeholder="">
+            </div>
+            <div class="form-group">
+              <div class="form-check form-check-inline">
+                <input class="form-check-input" type="radio" id="inlineRadio1"
+                  value="option1">
+                <label class="form-check-label" for="inlineRadio1">GSM</label>
+              </div>
+              <div class="form-check form-check-inline">
+                <input class="form-check-input" type="radio" id="inlineRadio2"
+                  value="option2">
+                <label class="form-check-label" for="inlineRadio2">FCM</label>
+              </div>
+              <div class="form-check form-check-inline">
+                <input class="form-check-input" type="radio" id="inlineRadio3"
+                  value="option3">
+                <label class="form-check-label" for="inlineRadio3">None</label>
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="serverKey">Server Key</label>
+              <input type="text" value="0" class="form-control" id="serverKey" placeholder="">
+            </div>
+            <!-- <input type="submit" class="btn" name="androidSettings"> -->
+          </ng-template>
+        </li>
+        <li [ngbNavItem]="3" [destroyOnHide]="true">
+          <a ngbNavLink>IOS Settings</a>
+          <ng-template ngbNavContent>
+            <div class="form-group">
+              <label for="botID2">Bot ID</label>
+              <input type="text" [value]="botID" class="form-control" id="botID2" placeholder=""  >
+            </div>
+            <div class="form-group">
+              <label for="token">Token</label>
+              <input type="number" class="form-control" id="token" placeholder="">
+            </div>
+            <div class="form-group">
+              <label for="file-input">IOS Push Certificate(.p12)</label>
+              <input type="file" formControlName="iosCertificate" (change)="onFileChange($event)" class="form-control-file">
+            </div>
+            <div class="form-group">
+              <label for="serverKey">Server Key</label>
+              <input type="text" value="0" class="form-control" id="serverKey" placeholder="">
+            </div>
+            <input type="submit" class="btn">
+          </ng-template>
+        </li>
+      </ul>
+      <div [ngbNavOutlet]="nav" class="mt-2"></div>
+    </form>
+    <!-- <pre>Active: {{ active }}</pre> -->
+  </div>
+</div>

@@ -1,0 +1,68 @@
+<h3>{{title}}</h3><br>
+<div class="card">
+    <div class="card-body">
+        <form>
+            <div class="form-group form-inline">
+                Search by ID: <input class="form-control ml-2" type="text" name="searchTerm"
+                    [(ngModel)]="service.searchTerm" />
+                <span class="ml-3" *ngIf="service.loading$ | async">Loading...</span>
+            </div>
+            <div class="table-responsive">
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <!-- <th scope="col">#</th> -->
+                            <th scope="col">Transaction ID</th>
+                            <th scope="col">Bot ID</th>
+                            <th scope="col">Bot User ID</th>
+                            <th scope="col">Amount</th>
+                            <th scope="col">Currency</th>
+                            <th scope="col">IP</th>
+                            <th scope="col">Payment Gateway</th>                            
+                            <th scope="col" sortable="transaction_date" (sort)="onSort($event)">Transaction Date</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <ng-container *ngIf="(total$ | async)>0; else nodata">
+                            <tr *ngFor="let bill of bills$ | async">
+                                <td>
+                                    <ngb-highlight [result]="bill.transaction_id" [term]="service.searchTerm">
+                                    </ngb-highlight>
+                                </td>
+                                <td>
+                                    <ngb-highlight [result]="bill.amount | number"></ngb-highlight>
+                                    (<ngb-highlight [result]="bill.currency"></ngb-highlight>)
+                                </td>
+                                <td>
+                                    <ngb-highlight [result]="bill.transaction_status | number"></ngb-highlight>
+                                </td>
+                                <td>
+                                    <ngb-highlight [result]="bill.transaction_date | date"></ngb-highlight>
+                                </td>
+                            </tr>
+                        </ng-container>
+                        <ng-template #nodata>                           
+                                <tr>
+                                    <td colspan="15">No Data Available</td>
+                                </tr>                            
+                        </ng-template>                                               
+                    </tbody>
+                </table>
+            </div>
+
+
+            <div class="d-flex flex-wrap justify-content-between p-2">
+                <ngb-pagination [collectionSize]="(total$ | async)" [(page)]="service.page"
+                    [pageSize]="service.pageSize">
+                </ngb-pagination>
+                <!-- (total$ | async)! -->
+                <select class="custom-select" style="width: auto" name="pageSize" [(ngModel)]="service.pageSize">
+                    <option [ngValue]="5">5 items per page</option>
+                    <option [ngValue]="10">10 items per page</option>
+                    <option [ngValue]="15">15 items per page</option>
+                </select>
+            </div>
+
+        </form>
+    </div>
+</div>
